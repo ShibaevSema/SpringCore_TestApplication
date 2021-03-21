@@ -1,16 +1,19 @@
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+@Component
 public class Client {
+
     private String id;
     private String fullName;
+    private String greeting;
 
-    public Client(String id,String fullName) {
+    public Client(@Value("${id}")String id,@Value("${fullName}")String fullName)
+    {
         this.id=id;
         this.fullName=fullName;
-
     }
 
-    private void live(){
-        System.out.println("клиент живет");
-    }
 
     public String getId() {
         return id;
@@ -27,4 +30,10 @@ public class Client {
     public void setId(String id) {
         this.id = id;
     }
+
+
+    public void setGreeting(@Value("${greeting}")String greeting){
+        this.greeting=greeting;
+    }
 }
+

@@ -1,23 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="client" class="Client">
-        <constructor-arg value="1"/>
-        <constructor-arg value="Sam"/>
+
+       xmlns:context="http://www.springframework.org/schema/context"
+
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+    <context:annotation-config/>
+
+    <context:component-scan base-package=" java"/>
+
+    <import resource="configuration/*"/>
+
+    <!-- <bean id="client" class="Client"
+           c:id="${id}"
+           c:fullName="${fullName}"
+           p:greeting="${greeting}">
+     </bean>
+
+     <bean id="event" class="Event" scope="prototype">
+         <constructor-arg>
+             <bean class="java.util.Date"/>
+         </constructor-arg>
+         <constructor-arg>
+             <bean class="java.text.DateFormat"
+                   factory-method="getDateTimeInstance"/>
+         </constructor-arg>
+     </bean>
+
+
+     <bean id="app" class="App">
+         <constructor-arg ref="client"/>
+         <constructor-arg ref="loggerMap"/>
+     </bean>
+
+     <util:map id="loggerMap" map-class="java.util.TreeMap">
+         <entry key="INFO"
+                value-ref="eventLogger"/>
+         <entry key="ERROR"
+                value-ref="combinedEventLogger"/>
+     </util:map>
+
+     <bean id="monitoring" class="Monitoring" depends-on="fileEventLogger,cacheFileEventLogger,app">
+     </bean>
+ -->
+
+    <bean id="lazyBean" class="LazyBean" lazy-init="true">
     </bean>
-    <bean id="eventLogger" class="ConsoleEventLogger"/>
-    <bean id="event" class="Event" scope="prototype">
-        <constructor-arg >
-                <bean class="java.util.Date"/>
-        </constructor-arg>
-        <constructor-arg >
-            <bean class="java.text.DateFormat"
-            factory-method="getDateTimeInstance"/>
-        </constructor-arg>
-    </bean>
-    <bean id="app" class="App">
-    <constructor-arg ref="client"/>
-    <constructor-arg ref="eventLogger"/>
-    </bean>
+
 </beans>

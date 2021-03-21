@@ -1,6 +1,11 @@
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.text.DateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
+
 
 public class Event {
     private int id = 0;
@@ -30,5 +35,7 @@ public class Event {
                 ", date=" + dateFormat.format(date) +
                 '}';
     }
+
+
 }
 
